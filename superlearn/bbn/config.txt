@@ -1,0 +1,32 @@
+EQ2 trust
+---------
+BBNTestDataProcessor 
+	-> select * from trust_net_guk_jun
+	-> src_char_id
+	-> dest_char_id
+ BBNTrainingDataProcessor
+	-> select * from trust_net_guk_feb_may
+	-> src_char_id
+	-> dest_char_id
+	-> uncomment putCharacterInfo and putDemographicsInfo
+BBNExperiment
+	private static final String DATASET_FILE_PATH_PREFIX = "C:\\Users\\zborbor\\work\\linkpred\\bbn\\";
+	private static final String RESULTS_FILE_NAME = "C:\\Users\\zborbor\\work\\linkpred\\bbn\\bbn_results.csv";
+
+Small Blue
+----------
+BBNTestDataProcessor 
+	-> select * from ibm_hashed_timeline_sentiment
+		where sign = '1' and month(time_entry) BETWEEN 9 and 12
+	-> sender_id
+	-> receiver_id
+BBNTrainingDataProcessor
+	-> select * from ibm_hashed_timeline_sentiment
+		where sign = '1' and month(time_entry) BETWEEN 1 and 8
+	-> sender_id
+	-> receiver_id
+	-> comment putCharacterInfo and putDemographicsInfo
+BBNExperiment
+	private static final String DATASET_FILE_PATH_PREFIX = "C:\\Users\\zborbor\\work\\linkpred\\ibm";
+	private static final String RESULTS_FILE_NAME = "C:\\Users\\zborbor\\work\\linkpred\\ibm\\ibm_results.csv";
+	
